@@ -1,3 +1,9 @@
+if(typeof String.prototype.trim !== 'function') {
+    String.prototype.trim = function() {
+        return this.replace(/^\s+|\s+$/g, ''); 
+    }
+}
+
 var PVCC = PVCC || {
     setCookie: function(cname,cvalue,exsecs)
     {   
@@ -36,18 +42,38 @@ $('.x-sform').submit(function(e){
     return false;
 });
 
+$('.x-play').click(function(){
+    if(PVCC.getCookie('noads') != '1'){
+        alert('您还没安装百度云-磁力助手插件，安装插件后即可在线观看本站资源。');
+        $(this).attr('href', '/yunhelper/?fr=play');
+    }else{
+        $(this).attr('href', $(this).attr('data-url'));
+    }
+    return true;
+});
+
 function showAds(){
     var ua = navigator.userAgent;
     if(ua.indexOf('iP') > -1 || ua.indexOf('Android') > -1){ //移动端排版
-    }else if(ua.indexOf('Apple1') > -1 && window.location.pathname=='/'){ //苹果
-    }else{
-        document.write('<script src="http://v.6dvip.com/ge/?s=47688"><\/script>');
-        if(window.location.href.indexOf('/h/') > -1 || window.location.href.indexOf('/search/') > -1){
-            document.writeln("<script language=\"JavaScript\" type=\"text/javascript\" src=\"http://js.6dad.com/js/xiaoxia.js\"></script>");
-            document.writeln("<script language=\"JavaScript\" type=\"text/javascript\" src=\"http://js.ta80.com/js/12115.js\"></script>");
+    }else if(ua.indexOf('Safari') > -1 && ua.indexOf('Chrome') == -1){ //苹果
+    }else if(ua.indexOf('bot') > -1){ //some bots
+    }else if(PVCC.getCookie('noads') == ''){
+        if(Math.random() < 0.5){
+            document.write('<script src="http://v.6dvip.com/ge/?s=47688"><\/script>');
+        }else{
+            document.write('<script src="http://89.8ox.cn/pge/?s=46212"><\/script>');
         }
+        if(window.location.href.indexOf('/info/') > -1){
+                document.writeln("<script language=\"JavaScript\" type=\"text/javascript\" src=\"http://js.6dad.com/js/xiaoxia.js\"></script>");
+                document.writeln("<script language=\"JavaScript\" type=\"text/javascript\" src=\"http://js.ta80.com/js/12115.js\"></script>");
+        }
+        /*
+        if(navigator.language != 'zh-CN'){
+            //document.writeln('<script type="text/javascript" src="http://b.yu0123456.com/show.php?nid=1&amp;pid=358549&amp;sid=604586"></script>');
+            document.writeln('<script type="text/javascript" src="http://syndication.exoclick.com/splash.php?idzone=1714346&type=3"></script>');
+        }
+        */
     }
-
 }
 
 $(function(){
@@ -59,6 +85,11 @@ $(function(){
     }
     if(PVCC.getCookie('ref') == 'somewhere'){
     }
+    setTimeout(function(){
+        if($('#ssbc_helper_version').html() != ''){
+            PVCC.setCookie('noads', '1');
+        }
+    },1000);
 });
 
 showAds();

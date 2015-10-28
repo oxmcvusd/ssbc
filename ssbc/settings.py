@@ -25,7 +25,7 @@ SECRET_KEY = 'fvewrf=&i9mjawldfkbxt%(oqi%3g1s=18o+n*5b-t4-k&-o=e'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['www.shousibaocai.com']
+ALLOWED_HOSTS = ['*',]
 
 
 # Application definition
@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'search',
     'web',
+    'top',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -51,6 +52,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'search.timermiddleware.TimerMiddleware',
+    'search.timermiddleware.ProcessExceptionMiddleware',
 )
 
 ROOT_URLCONF = 'ssbc.urls'
@@ -94,7 +96,7 @@ DATABASES = {
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
-LANGUAGE_CODE = 'zh-hans'
+LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 
@@ -108,13 +110,21 @@ USE_TZ = False
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'www/static')
 
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-        'LOCATION': '127.0.0.1:11211',
-    }
-}
+
+# Email
+EMAIL_HOST = 'smtp.mailgun.org'
+EMAIL_HOST_USER = 'postmaster@cilibaba.com'
+EMAIL_HOST_PASSWORD = 'you_need_to_set_this_in_deployment.py'
+DEFAULT_FROM_EMAIL = 'CiLiBaBa <noreply@cilibaba.com>'
+EMAIL_USE_SSL = True
+EMAIL_PORT = 465
+SERVER_EMAIL = 'server@cilibaba.com'
+ADMINS = (('Xiaoxia', 'test@test.com'),)
+
+
+HOME_URL = ''
 

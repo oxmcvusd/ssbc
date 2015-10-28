@@ -1,9 +1,10 @@
 {% extends 'layout.html' %}
-{% block title %}手撕包菜 - 收录最快的磁力链接搜索引擎{% endblock %}
+{% load staticfiles %}
+{% block title %}CiLiBaBa - 磁力搜索_磁力链接_种子搜索_番号搜索_MagnetSearch{% endblock %}
 {% block metas %}
 {{block.super}}
-<meta name="keywords" content="磁力搜索,磁力链接,种子搜索网站,BT搜索,DHT搜索">
-<meta name="description" content="磁力搜索(手撕包菜)是一个专业提供磁力连接搜索的网站，索引全网上千万磁力链接，又被誉为BT种子搜索神器。也是国内最大的磁力链接的发现和分享社区。">
+<meta name="keywords" content="磁力巴巴,cilibaba,磁力助手,手撕包菜,磁力搜索,磁力链接,种子搜索网站,BT搜索,DHT搜索,番号搜索">
+<meta name="description" content="CiLiBaBa，专业提供磁力连接搜索的网站，全网最新，千万磁力链接，可以使用迅雷、百度云等下载和浏览磁力链接的内容。">
 {% endblock %}
 
 {% block content %}
@@ -11,13 +12,13 @@
 <div class="container">
     <div class="div-search-box col-lg-offset-2 col-lg-8">
         <div class="logo">
-            <img src="/static/ssbc.png" />
+            <img src="{% static 'cilibaba.png' %}" />
         </div>
         <div>
             <div class="input-group">
-                <input placeholder="搜索电影、电视剧、明星、游戏..." autocomplete="off" type="text" class="form-control x-kw" name="s">
+                <input placeholder="Movies, actors, or what do you want?" autocomplete="off" type="text" class="form-control x-kw" name="s">
                 <span class="input-group-btn">
-                <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span> 磁力搜索</button>
+                <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span> Search</button>
                 </span>
             </div>
         </div>
@@ -27,19 +28,12 @@
                 <a href="/search/{{r.keyword|urlencode}}/">{{r.keyword}}</a> &nbsp;&nbsp;&nbsp;&nbsp;
             {% endfor %}
             </p>
-            <p class="tips2">
-                <!--
-                <span style="color:red;">资源交流群：102900082(满)  网站建设群：178886628Q（限忠实粉丝加群，白菜勿进）</span>
-                -->
-                <p><a href="/howto/">如何免费在线播放磁力链接？</a>
-            </p>
         </div>
         <div class="div-ads-front" style="margin-top: 40px; text-align:center; margin-left: 0px;">
         </div>
     </div>
 </div>
 </form>
-
 {% include 'foot.html' %}
 {% endblock %}
 
@@ -49,10 +43,11 @@
 $(function(){
     $('.x-kw').focus();
 });
-
 setTimeout(function(){
     $('.good').fadeIn('slow');
 }, 500);
 </script>
+
+
 {% endblock %}
 
